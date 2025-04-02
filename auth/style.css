@@ -1,0 +1,142 @@
+body {
+    background: #1690A7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    font-family: sans-serif;
+    box-sizing: border-box;
+}
+
+form {
+    width: 100%;
+    max-width: 500px;
+    border: 2px solid #ccc;
+    padding: 30px;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 1.8em;
+}
+
+input {
+    display: block;
+    border: 2px solid #ccc;
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+label {
+    color: #888;
+    font-size: 16px;
+    padding: 10px 0;
+    display: block;
+}
+
+button {
+    width: 100%;
+    background: #555;
+    padding: 10px 15px;
+    color: #fff;
+    border-radius: 5px;
+    border: none;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: #333;
+}
+
+.error {
+    background: #F2DEDE;
+    color: #A94442;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    margin: 20px 0;
+}
+
+.success {
+    background: #D4EDDA;
+    color: #40754C;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    margin: 20px 0;
+}
+
+h1 {
+    text-align: center;
+    color: #fff;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.ca {
+    font-size: 14px;
+    display: inline-block;
+    padding: 10px 0;
+    text-decoration: none;
+    color: #444;
+    text-align: center;
+    display: block;
+}
+
+.ca:hover {
+    text-decoration: underline;
+}
+
+/* Media Query for Mobile Devices */
+@media (max-width: 630px) {
+    body {
+        padding: 20px;
+        height: auto;
+    }
+
+    form { 
+        width: 90%;
+        padding: 20px;
+    }
+
+    h2 {
+        font-size: 1.5em;
+        margin-bottom: 30px;
+    }
+
+    input {
+        font-size: 1em;
+        padding: 8px;
+    }
+
+    button {
+        padding: 10px; 
+        font-size: 1em;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    label {
+        font-size: 14px;
+    }
+
+    .error, .success {
+        font-size: 0.9em;
+    }
+}

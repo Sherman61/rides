@@ -1,0 +1,112 @@
+/* General Styles */
+body {
+    background-color: #eae7dc;
+    color: #5d4037;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Container */
+.container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    flex-grow: 1; /* Pushes footer to bottom */
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #0b5ed7;
+    border-color: #74a7ff;
+    color: white;
+    opacity: 0.9;
+}
+
+.btn-warning {
+    background-color: #b92d5d;
+    border-color: #b92d5d;
+    color: white;
+}
+
+.btn-danger {
+    background-color: #b92d5d;
+    border-color: #b92d5d;
+    color: white;
+}
+
+/* Card Styles */
+.card {
+    background-color: #ffe6e9;
+    color: #5d4037;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+    color: #5d4037;
+    font-weight: bold;
+}
+
+.card-text {
+    color: #5d4037;
+}
+
+/* Add Ride Button */
+#plus {
+    background-color: #74a7ff;
+    border-color: #74a7ff;
+    color: white;
+}
+
+/* Links */
+a {
+    color: #5d4037;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Footer - Fixed at Bottom */
+footer {
+    background-color: #ffffff;
+   
+    text-align: center;
+    padding: 10px;
+    border-top: 2px solid #5d4037;
+    z-index: -1;
+    /* position: absolute; */
+    bottom: 0;
+    width: 100%;
+}
+
+/* Form Inputs */
+input, select {
+    border: 2px solid #5d4037;
+    border-radius: 5px;
+    padding: 8px;
+}
+
+/* Error Messages */
+.text-danger {
+    font-size: 0.85rem;
+}
+
+/* Button Hover Effects */
+.btn:hover {
+    opacity: 1;
+}
+
+/* Centered Header */
+.text-center {
+    text-align: center;
+}
+footer a{
+    color: #bcd4c1;
+    font-weight: 550;
+}
