@@ -10,13 +10,11 @@ if (isset($_SESSION['user_id'])) {
     header("Location: index.php");
     exit;
 }
-if ($_SERVER['REQUEST_METHOD'] == "POST") 
-{
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $username = trim($_POST['username']);
     $password = trim($_POST['password']);
 
-    if (!empty($username) && !empty($password)) 
-    {
+    if (!empty($username) && !empty($password)) {
         // Prepare and execute the statement to fetch the user data
         $stmt = $con->prepare("SELECT * FROM users WHERE username = ?");
         $stmt->bind_param("s", $username);
@@ -24,19 +22,32 @@ if ($_SERVER['REQUEST_METHOD'] == "POST")
         $result = $stmt->get_result();
         $stmt->close();
 
-        if ($result && $result->num_rows > 0) 
-        {
-            $user_data = $result->fetch_assoc(); 
+        if ($result && $result->num_rows > 0) {
+            $user_data = $result->fetch_assoc();
 
             // Verify the password
-            if (password_verify($password, $user_data['password_hash'])) 
-            {
+            if (password_verify($password, $user_data['password_hash'])) {
                 // Regenerate session ID to prevent session fixation attacks
                 session_regenerate_id(true);
 
                 // Store user data in the session
                 $_SESSION['user_id'] = $user_data['user_id'];
                 $_SESSION['username'] = $user_data['username'];
+
+
+
+                // Associate pending ride if it exists
+                if (isset($_SESSION['pending_ride_id'])) {
+                    $ride_id = $_SESSION['pending_ride_id'];
+
+                    $link_stmt = $con->prepare("UPDATE rides SET user_id = ? WHERE id = ?");
+                    $link_stmt->bind_param("ii", $user_data['user_id'], $ride_id);
+                    $link_stmt->execute();
+                    $link_stmt->close();
+
+                    unset($_SESSION['pending_ride_id']);
+                }
+
 
                 // Generate a unique session ID for tracking the user's session in the active_players table
                 $session_id = session_id();
@@ -59,19 +70,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST")
                 // Redirect to the index page
                 header("Location: index.php");
                 exit;
-            } 
-            else 
-            {
+            } else {
                 $error_message = "Wrong username or password!";
             }
-        } 
-        else 
-        {
+        } else {
             $error_message = "Wrong username or password!";
         }
-    } 
-    else 
-    {
+    } else {
         $error_message = "Please enter valid information!";
     }
 }
@@ -79,62 +84,98 @@ if ($_SERVER['REQUEST_METHOD'] == "POST")
 
 <!doctype html>
 
-<html lang="en"> 
+<html lang="en">
 
- <head> 
+<head>
 
-  <meta charset="UTF-8"> 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>login</title> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <link rel="stylesheet" href="./login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
 
-  <link rel="stylesheet" href="./login.css"> 
+</head>
 
- </head> 
+<body> <!-- partial:index.partial.html -->
 
- <body> <!-- partial:index.partial.html --> 
+    <section> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span>
+        <form method="post" class="signin">
+            <!-- <div class="signin">  -->
 
-  <section> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> 
-<form method="post" class="signin">
-   <!-- <div class="signin">  -->
+            <div class="content">
+            <i class="fa-solid fa-arrow-left" id="openNav" onclick="location.href='../index.php'"></i>
+                <h2>Sign In</h2>
 
-    <div class="content"> 
+                <div class="form">
 
-     <h2>Sign In</h2> 
+                    <div class="inputBox">
 
-     <div class="form"> 
+                        <input type="text" name="username"
+                            value="<?php echo isset($username) ? htmlspecialchars($username) : ''; ?>" required>
+                        <i>Instagram Handle</i>
 
-      <div class="inputBox"> 
+                    </div>
 
-        <input type="text" name="username" value="<?php echo isset($username) ? htmlspecialchars($username) : ''; ?>" required> <i>Instagram Handle</i>
+                    <div class="inputBox">
 
-      </div> 
+                        <input type="password" name="password" autocomplete="current-password" required> <i>Password</i>
 
-      <div class="inputBox"> 
+                    </div>
 
-       <input type="password" name="password" autocomplete="current-password" required> <i>Password</i> 
- 
-      </div> 
+                    <div class="links"> <a href="#" onclick="alert('contact shiya_lives on instagram')">Forgot
+                            Password</a> <a href="signup.php">Signup</a>
 
-      <div class="links"> <a href="#" onclick="alert('contact shiya_lives on instagram')">Forgot Password</a> <a href="signup.php">Signup</a> 
+                    </div>
 
-      </div> 
+                    <div class="inputBox">
+                        <?php if (isset($error_message)): ?>
+                            <p class="error-message"><?php echo htmlspecialchars($error_message); ?></p>
+                        <?php endif; ?>
+                        <input type="submit" value="Login">
 
-      <div class="inputBox"> 
-        <?php if (isset($error_message)): ?>
-        <p class="error-message"><?php echo htmlspecialchars($error_message); ?></p>
-    <?php endif; ?>
-       <input type="submit" value="Login"> 
+                    </div>
 
-      </div> 
+                </div>
 
-     </div> 
+            </div>
 
-    </div> 
+            </div>
 
-   </div> 
-
-  </section> <!-- partial --> 
-</form>
- </body>
+    </section> <!-- partial -->
+    </form>
+</body>
 
 </html>

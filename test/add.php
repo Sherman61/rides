@@ -24,6 +24,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if ($stmt->execute()) {
+        if (!$user_id) {
+            $_SESSION['pending_ride_id'] = $conn->insert_id;
+        }
+        
+        $stmt->close();
+        $conn->close();
+
+        // If the user is logged in, just redirect to index
+        if (isset($_SESSION['user_id'])) {
+            header('Location: index.php');
+            exit;
+        }
+
+        // Show login suggestion if user is not logged in
         echo "
         <!DOCTYPE html>
         <html lang='en'>
@@ -31,10 +45,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <meta charset='UTF-8'>
             <meta name='viewport' content='width=device-width, initial-scale=1.0'>
             <title>Ride Added</title>
-           
             <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css' rel='stylesheet'>
         </head>
         <body>
+        
         <div class='container mt-5 text-center'>
             <div class='alert alert-success'>
                 Ride successfully added!
@@ -64,9 +78,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     } else {
         echo "<div class='alert alert-danger'>Error: " . $stmt->error . "</div>";
+        $stmt->close();
+        $conn->close();
     }
-
-    $stmt->close();
 }
 ?>
 
@@ -78,11 +92,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="description" content="Easily add your ride details to our carpooling system. Whether you're offering a ride or looking for one, submit your information in seconds and connect with others for a smooth journey.">
     <title>Add Ride</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="add.css">
 </head>
 <body>
+
 <div class="container mt-5">
     <i class="fa-solid fa-arrow-left" id="openNav" onclick="location.href='index.php'"></i>
     <h1 class="text-center mb-4">Add New Ride</h1>
@@ -150,5 +164,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
-<?php $conn->close(); ?>
