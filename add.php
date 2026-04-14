@@ -1,7 +1,7 @@
 <?php
 // add.php - Add New Ride
-
 require 'db.php';
+session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = trim($_POST['name']);
@@ -11,21 +11,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $ride_time = isset($_POST['whenever']) ? null : $_POST['ride_time'];
     $contact = $_POST['contact'];
     $whatsapp = !empty($_POST['whatsapp']) ? $_POST['whatsapp'] : "";
-
     $memo = !empty($_POST['memo']) ? substr(trim($_POST['memo']), 0, 100) : "";
 
-    // Insert new ride into database
-    $stmt = $conn->prepare("INSERT INTO rides (name, ride_type, from_city, ride_date, ride_time, contact, whatsapp, memo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssssss", $name, $ride_type, $from_city, $ride_date, $ride_time, $contact, $whatsapp, $memo);
+    $user_id = $_SESSION['user_id'] ?? null;
+
+    if ($user_id) {
+        $stmt = $conn->prepare("INSERT INTO rides (name, ride_type, from_city, ride_date, ride_time, contact, whatsapp, memo, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssssssi", $name, $ride_type, $from_city, $ride_date, $ride_time, $contact, $whatsapp, $memo, $user_id);
+    } else {
+        $stmt = $conn->prepare("INSERT INTO rides (name, ride_type, from_city, ride_date, ride_time, contact, whatsapp, memo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssssss", $name, $ride_type, $from_city, $ride_date, $ride_time, $contact, $whatsapp, $memo);
+    }
 
     if ($stmt->execute()) {
+        $stmt->close();
+        $conn->close();
         header('Location: index.php');
         exit;
     } else {
         echo "<div class='alert alert-danger'>Error: " . $stmt->error . "</div>";
+        $stmt->close();
+        $conn->close();
     }
-
-    $stmt->close();
 }
 ?>
 
@@ -113,5 +120,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </body>
 
 </html>
-
-<?php $conn->close(); ?>

@@ -35,20 +35,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 $_SESSION['username'] = $user_data['username'];
 
 
-
-                // Associate pending ride if it exists
-                if (isset($_SESSION['pending_ride_id'])) {
-                    $ride_id = $_SESSION['pending_ride_id'];
-
-                    $link_stmt = $con->prepare("UPDATE rides SET user_id = ? WHERE id = ?");
-                    $link_stmt->bind_param("ii", $user_data['user_id'], $ride_id);
-                    $link_stmt->execute();
-                    $link_stmt->close();
-
-                    unset($_SESSION['pending_ride_id']);
-                }
-
-
                 // Generate a unique session ID for tracking the user's session in the active_players table
                 $session_id = session_id();
 

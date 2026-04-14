@@ -72,41 +72,18 @@ a:hover {
     text-decoration: underline;
 }
 
-/* Footer - Fixed at Bottom */
-footer {
-    background-color: #ffffff;
-   
+/* Footer */
+.site-footer {
+    margin-top: auto;
+    background: #2f2924;
+    color: #f8eee5;
+    border-top: 1px solid #443932;
     text-align: center;
     padding: 10px;
-    border-top: 2px solid #5d4037;
-    z-index: -1;
-    /* position: absolute; */
-    bottom: 0;
     width: 100%;
 }
 
-/* Form Inputs */
-input, select {
-    border: 2px solid #5d4037;
-    border-radius: 5px;
-    padding: 8px;
-}
-
-/* Error Messages */
-.text-danger {
-    font-size: 0.85rem;
-}
-
-/* Button Hover Effects */
-.btn:hover {
-    opacity: 1;
-}
-
-/* Centered Header */
-.text-center {
-    text-align: center;
-}
-footer a{
-    color: #bcd4c1;
-    font-weight: 550;
+.site-footer a {
+    color: #bde9c4;
+    font-weight: 600;
 }
