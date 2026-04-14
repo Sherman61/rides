@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 if (isset($_SESSION['pending_ride_id'])) {
                     $ride_id = $_SESSION['pending_ride_id'];
 
-                    $link_stmt = $con->prepare("UPDATE rides SET user_id = ? WHERE id = ?");
+                    $link_stmt = $con->prepare("UPDATE rides SET user_id = ? WHERE id = ? AND user_id IS NULL");
                     $link_stmt->bind_param("ii", $user_data['user_id'], $ride_id);
                     $link_stmt->execute();
                     $link_stmt->close();
