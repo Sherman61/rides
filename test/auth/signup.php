@@ -56,51 +56,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sign Up</title>
-  <!-- <link rel="stylesheet" href="styles.css"> -->
+  <link rel="stylesheet" href="styles.css">
 
-<style type="text/css">
-.login-container{
-  position: relative;
-}
-
-#button{ 
-    padding: 10px;
-    color: white;
-    background-color: Lightblue;
-    border: none;
-}
-::placeholder{
-    color: #333;
-    opacity: 1;
-}
-
-.agree-checkbox {
-  width: 20px;
-  height: 20px;
-  margin-right: 10px;
-}
-
-.agree-label {
-  font-size: 16px;
-  color: wheat;
-  display: inline-block;
-  margin-top: 5px;
-}
-
-.agree-link {
-  color: wheat;
-  text-decoration: underline;
-}
-
-#openNav {
-   
-  font-weight: 900;
-  position: absolute;
-  left: 10px;
-  top: 10px;
-  font-size: 2.5em;
-}
-</style>
  
 </head>
 <body>
@@ -125,14 +82,14 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
           <input id="password" type="password" name="password" pattern=".{8,}" title="8 characters minimum" required autocomplete="new-password" placeholder="Password">
         </div>
         <?php if(isset($error)): ?>
-        <p style="color: red;"><?php echo $error; ?></p> 
+        <p class="form-error"><?php echo htmlspecialchars($error); ?></p> 
         <?php endif; ?>
-        <div class="input-group">
-          <label for="agree" class="agree-label">I agree to the <a href="agreemint.html" class="agree-link">terms and conditions</a>.</label>
+        <div class="terms-row">
           <input type="checkbox" name="agree" id="agree" class="agree-checkbox" required>
+          <label for="agree" class="agree-label">I agree to the <a href="agreemint.html" class="agree-link">terms and conditions</a>.</label>
         </div>
-        <button id="button" type="submit" value="Signup" name="submit" class="login-button">Submit</button>
-        <a class="agree-label" href="login.php">Click to Login</a><br><br>
+        <button type="submit" value="Signup" name="submit" class="login-button">Create Account</button>
+        <p class="auth-link">Already registered? <a href="login.php">Login</a></p>
       </form>
     </div>
   </div>

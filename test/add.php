@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $conn->close();
 
         // If the user is logged in, just redirect to index
-        if (isset($_SESSION['user_id'])) {
+        if ($user_id) {
             header('Location: index.php');
             exit;
         }
@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class='alert alert-info'>
                 <p><strong>Want to manage your ride later?</strong></p>
                 <p>
-                    <a href='auth/login.php' class='btn btn-primary'>Login</a> to unlock features like ride chats, ride history, and editing/deleting your rides.
+                    <a href='auth/login.php' class='btn btn-primary'>Login</a> to attach this ride to your account.
                 </p>
                 <p>Redirecting to home in <span id='countdown'>10</span> seconds...</p>
             </div>
