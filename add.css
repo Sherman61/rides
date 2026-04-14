@@ -72,41 +72,17 @@ a:hover {
     text-decoration: underline;
 }
 
-/* Footer - Fixed at Bottom */
-footer {
-    background-color: #ffffff;
-   
+/* Footer */
+.app-footer {
+    background-color: #071d41e7;
+    color: #f5f1e9;
     text-align: center;
-    padding: 10px;
-    border-top: 2px solid #5d4037;
-    z-index: -1;
-    /* position: absolute; */
-    bottom: 0;
+    padding: 14px 10px;
+    border-top: 2px solid #74a7ff;
     width: 100%;
 }
 
-/* Form Inputs */
-input, select {
-    border: 2px solid #5d4037;
-    border-radius: 5px;
-    padding: 8px;
-}
-
-/* Error Messages */
-.text-danger {
-    font-size: 0.85rem;
-}
-
-/* Button Hover Effects */
-.btn:hover {
-    opacity: 1;
-}
-
-/* Centered Header */
-.text-center {
-    text-align: center;
-}
-footer a{
+.app-footer a {
     color: #bcd4c1;
     font-weight: 550;
 }

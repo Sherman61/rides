@@ -113,187 +113,75 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <script src="active_players.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-      body {
-    margin: 20px 0; /* Slight margin from the top */
-    background-color: #f4f4f4; /* Lighter background color */
+body {
+    margin: 0;
+    background: #eae7dc;
     min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+    padding: 30px 14px;
+    color: #1f2937;
 }
 
 .profile-container {
-    max-width: 800px;
-    width: 100%;
-    padding: 20px;
-    background-color: #fff; /* White background for the profile container */
-    color: #333; /* Dark text color */
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow */
-    box-sizing: border-box;
-    overflow-y: auto;
-    max-height: 100%;
+    max-width: 860px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    overflow: hidden;
 }
 
 .profile-header {
     text-align: center;
-    margin-bottom: 20px;
+    padding: 26px 20px;
+    background: linear-gradient(120deg, #071d41e7, #4f8fff);
+    color: white;
 }
 
 .profile-pic {
     position: relative;
-    width: 150px;
-    height: 150px;
+    width: 130px;
+    height: 130px;
     margin: 0 auto 15px;
     border-radius: 50%;
     overflow: hidden;
-    background-color: #eee; /* Lighter background for profile pic container */
+    border: 3px solid #fff;
 }
 
-.profile-pic img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
+.profile-pic img { width: 100%; height: 100%; object-fit: cover; }
 
 .edit-profile-pic {
     position: absolute;
-    bottom: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 5px;
-    border-radius: 50%;
+    bottom: 6px;
+    right: 6px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 999px;
+    padding: 8px;
     cursor: pointer;
 }
 
-.edit-profile-pic i {
-    color: #fff;
-    font-size: 1.2em;
-}
-
-.profile-header .username {
-    font-size: 1.5em;
-    font-weight: bold;
-    color: #333;
-}
-
-.profile-header .full-name {
-    font-size: 1.2em;
-    color: #777;
-}
-
-.profile-body {
-    margin-top: 20px;
-}
-
-.profile-section {
-    margin-bottom: 30px;
-}
-
-.profile-section h3 {
-    font-size: 1.5em;
-    margin-bottom: 15px;
-    color: #4CAF50;
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #333;
-}
-
-.form-group input,
-.form-group textarea {
+.full-name { color: #dbeafe; }
+.profile-body { padding: 24px; }
+.profile-section { margin-bottom: 22px; }
+.profile-section h3 { color: #071d41e7; margin-bottom: 12px; }
+.form-group { margin-bottom: 12px; }
+.form-group label { display: block; font-weight: 600; margin-bottom: 4px; }
+.form-group input, .form-group textarea {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #fff; /* White input fields */
-    color: #333; /* Dark text color */
+    border: 1px solid #c7ced8;
+    border-radius: 8px;
+    padding: 10px 12px;
 }
-
-.form-group input[type="file"] {
-    padding: 5px;
-    background-color: #eee;
-    color: #777;
-}
-
 .save-btn {
-    background-color: #4CAF50;
+    background: #071d41e7;
     color: white;
-    padding: 10px 20px;
     border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1em;
-    transition: background-color 0.3s ease;
+    border-radius: 8px;
+    padding: 10px 16px;
 }
-
-.save-btn:hover {
-    background-color: #45a049;
-}
-
-.message {
-    padding: 10px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    font-weight: bold;
-    text-align: center;
-}
-
-.success-message {
-    background-color: #4CAF50;
-    color: white;
-}
-
-.error-message {
-    background-color: #f44336;
-    color: white;
-}
-
-@media screen and (max-width: 768px) {
-    .profile-container {
-        width: 90%;
-    }
-
-    .profile-header .username {
-        font-size: 1.2em;
-    }
-
-    .profile-header .full-name {
-        font-size: 1em;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .profile-pic {
-        width: 100px;
-        height: 100px;
-    }
-
-    .profile-header .username {
-        font-size: 1em;
-    }
-
-    .profile-header .full-name {
-        font-size: 0.9em;
-    }
-
-    .save-btn {
-        font-size: 0.9em;
-        padding: 8px 15px;
-    }
-
-    .profile-section h3 {
-        font-size: 1.3em;
-    } 
-}
+.save-btn:hover { background: #0f326c; }
+.message { padding: 10px; border-radius: 8px; margin-bottom: 12px; }
+.success-message { background: #dcfce7; color: #166534; }
+.error-message { background: #fee2e2; color: #991b1b; }
 #openNav {
   position: fixed;
   top: 10px;
@@ -302,7 +190,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   font-size: 24px;
   color: #000;
 }
-    </style>
+</style>
 </head>
 <body>
 <i class="fa-solid fa-arrow-left" id="openNav" onclick="location.href='index.php'"></i>

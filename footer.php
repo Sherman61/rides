@@ -1,4 +1,4 @@
-<footer class="text-center mt-5 p-3 bg-dark text-white">
+<footer class="app-footer text-center mt-5 p-3">
     Website sponsored by WEB SHADCHAN <h6>(Shiya Sherman)</h6>
     <a href="https://wa.me/8452441202" target="_blank" class="">
         <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" width="20">
