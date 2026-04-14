@@ -1,7 +1,6 @@
 /* General Styles */
 html, body{
-    max-height: 100vh;
-
+    min-height: 100vh;
 }
  body {
     background-color: #eae7dc;
@@ -9,6 +8,7 @@ html, body{
     font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
 } 
 .fa-user {
     position: fixed;
@@ -17,12 +17,16 @@ html, body{
     margin: 10px;
     font-size: 48px;
     color: #000;
+    @media (max-width:500px) {
+        position: absolute;
+    }
   } 
 
   .animate__animated, .animate__pulse{
     /* animation: pulse; referring directly to the animation's @keyframe declaration */
   animation-duration: 5s; /* don't forget to set a duration! */
 }
+
 
 /* Container */
 .container { 

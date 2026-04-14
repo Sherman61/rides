@@ -10,7 +10,19 @@ html, body{
     flex-direction: column;
     justify-content: space-between;
 } 
+.fa-user {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    margin: 10px;
+    font-size: 48px;
+    color: #000;
+  } 
 
+  .animate__animated, .animate__pulse{
+    /* animation: pulse; referring directly to the animation's @keyframe declaration */
+  animation-duration: 5s; /* don't forget to set a duration! */
+}
 /* Container */
 .container { 
     background-color: #ffffff;

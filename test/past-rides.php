@@ -1,4 +1,3 @@
-
 //past-rides.php
 <?php
 include 'index_components/error-handler.php';
@@ -41,7 +40,9 @@ include_once 'index_components/filter-dropdown.php';
 include_once 'index_components/search-bar.php';
 echo "this shows only old rides for analytic purposes";
 include 'index_components/ride-list.php';
+?>
 <div class="space"></div>
+<?php
 include_once "footer.php" ;
 
 ?>

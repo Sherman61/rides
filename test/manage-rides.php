@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 fetch('delete.php', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                    body: `ride_id=${rideId}`
+                    body: `id=${rideId}`
                 })
                 .then(res => res.json())
                 .then(data => {
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
             fetch('toggle_protect.php', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                body: `ride_id=${rideId}&prevent_delete=${value}`
+                body: `id=${rideId}&prevent_delete=${value}`
             })
             .then(res => res.text())
             .then(text => console.log("Toggle updated:", text))

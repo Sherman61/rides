@@ -12,16 +12,15 @@ body {
   min-height: 100vh;
   background: #000;
 }
-  
-#openNav { 
-  font-family: "Font Awesome 6 Free";
-    font-weight: 900;
-    position: absolute;
-    left: 10px;
-    top: 10px;
-    font-size: 1.5em;
-}
 
+#openNav {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  font-size: 1.5em;
+}
 
 section {
   position: absolute;
