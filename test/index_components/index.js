@@ -86,10 +86,12 @@ function contactDev(){
                     const matchesSearch = search.length < 2 || details.includes(search);
 
                     if (matchesFilter && matchesSearch) {
-                        card.closest(".col-md-4").style.display = "block";
+                        const cardCol = card.closest("[class*='col-']") || card.parentElement;
+                        if (cardCol) cardCol.style.display = "block";
                         hasResults = true;
                     } else {
-                        card.closest(".col-md-4").style.display = "none";
+                        const cardCol = card.closest("[class*='col-']") || card.parentElement;
+                        if (cardCol) cardCol.style.display = "none";
                     }
                 });
 

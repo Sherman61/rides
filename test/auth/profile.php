@@ -133,8 +133,9 @@ body {
 .profile-header {
     text-align: center;
     padding: 26px 20px;
-    background: linear-gradient(120deg, #071d41e7, #4f8fff);
-    color: white;
+    background: #f8fafc;
+    border-bottom: 1px solid #e5e7eb;
+    color: #111827;
 }
 
 .profile-pic {
@@ -159,7 +160,7 @@ body {
     cursor: pointer;
 }
 
-.full-name { color: #dbeafe; }
+.full-name { color: #6b7280; }
 .profile-body { padding: 24px; }
 .profile-section { margin-bottom: 22px; }
 .profile-section h3 { color: #071d41e7; margin-bottom: 12px; }
@@ -172,13 +173,13 @@ body {
     padding: 10px 12px;
 }
 .save-btn {
-    background: #071d41e7;
+    background: #1f2937;
     color: white;
     border: none;
     border-radius: 8px;
     padding: 10px 16px;
 }
-.save-btn:hover { background: #0f326c; }
+.save-btn:hover { background: #111827; }
 .message { padding: 10px; border-radius: 8px; margin-bottom: 12px; }
 .success-message { background: #dcfce7; color: #166534; }
 .error-message { background: #fee2e2; color: #991b1b; }

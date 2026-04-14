@@ -24,50 +24,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if ($stmt->execute()) {
-        if (!$user_id) {
-            $_SESSION['pending_ride_id'] = $conn->insert_id;
-        }
-
         $stmt->close();
         $conn->close();
-
-        if ($user_id) {
-            header('Location: index.php');
-            exit;
-        }
-
-        echo "
-        <!DOCTYPE html>
-        <html lang='en'>
-        <head>
-            <meta charset='UTF-8'>
-            <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-            <title>Ride Added</title>
-            <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css' rel='stylesheet'>
-        </head>
-        <body>
-        <div class='container mt-5 text-center'>
-            <div class='alert alert-success'>Ride successfully added!</div>
-            <div class='alert alert-info'>
-                <p><strong>Want to manage your ride later?</strong></p>
-                <p><a href='auth/login.php' class='btn btn-primary'>Login</a> to attach this ride to your account.</p>
-                <p>Redirecting to home in <span id='countdown'>10</span> seconds...</p>
-            </div>
-        </div>
-        <script>
-            let seconds = 10;
-            const countdown = document.getElementById('countdown');
-            const interval = setInterval(() => {
-                seconds--;
-                countdown.textContent = seconds;
-                if (seconds <= 0) {
-                    clearInterval(interval);
-                    window.location.href = 'index.php';
-                }
-            }, 1000);
-        </script>
-        </body>
-        </html>";
+        header('Location: index.php');
         exit;
     } else {
         echo "<div class='alert alert-danger'>Error: " . $stmt->error . "</div>";
